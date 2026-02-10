@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Favorite Person ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(160deg,#050507,#0f101a);
+color:white;
+overflow-x:hidden;
+}
+
+/* floating hearts */
+.heart{
+position:fixed;
+bottom:-20px;
+color:#ff4d88;
+animation:float linear infinite;
+opacity:.7;
+}
+
+@keyframes float{
+from{transform:translateY(0);}
+to{transform:translateY(-120vh);}
+}
+
+/* hero */
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+h1{
+font-size:3.2rem;
+color:#ff4d88;
+}
+
+.subtitle{
+opacity:.75;
+margin-top:10px;
+}
+
+.letter{
+margin-top:40px;
+background:rgba(255,255,255,.04);
+backdrop-filter:blur(8px);
+padding:30px;
+border-radius:24px;
+max-width:650px;
+transform:translateY(40px);
+opacity:0;
+animation:fadeUp 1.6s forwards;
+animation-delay:.6s;
+}
+
+@keyframes fadeUp{
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+.btn{
+margin-top:25px;
+padding:14px 28px;
+border:none;
+border-radius:40px;
+background:#ff4d88;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.08);
+box-shadow:0 0 25px #ff4d88;
+}
+
+/* gallery */
+
+.gallery{
+padding:90px 20px;
+text-align:center;
+}
+
+.grid{
+margin-top:45px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:22px;
+max-width:1000px;
+margin-inline:auto;
+}
+
+.grid img{
+width:100%;
+height:260px;
+object-fit:cover;
+border-radius:22px;
+cursor:pointer;
+transition:.4s;
+}
+
+.grid img:hover{
+transform:scale(1.06);
+}
+
+/* fullscreen image */
+
+.viewer{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99;
+}
+
+.viewer img{
+max-width:90%;
+max-height:85%;
+border-radius:20px;
+}
+
+/* countdown */
+
+.countdown{
+padding:90px 20px;
+text-align:center;
+}
+
+.timer{
+font-size:2.8rem;
+color:#ff4d88;
+margin-top:20px;
+font-weight:700;
+letter-spacing:1px;
+}
+
+/* GAME */
+
+.game{
+padding:100px 20px;
+text-align:center;
+}
+
+#loveBtn{
+margin-top:40px;
+padding:20px 34px;
+font-size:20px;
+border:none;
+border-radius:50px;
+background:#ff4d88;
+color:white;
+cursor:pointer;
+transition:.2s;
+position:relative;
+}
+
+#loveBtn:hover{
+transform:scale(1.1);
+}
+
+.meter{
+width:320px;
+height:26px;
+background:#1c1c26;
+border-radius:20px;
+margin:30px auto;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+width:0%;
+background:#ff4d88;
+transition:.25s;
+}
+
+.result{
+margin-top:20px;
+font-size:22px;
+color:#ff4d88;
+}
+
+canvas{
+position:fixed;
+inset:0;
+pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="hearts"></div>
+
+<section class="hero">
+
+<h1>Hi sayangku tercinta 🥰</h1>
+<p class="subtitle">Aku bikin sesuatu kecil... semoga kamu suka.</p>
+
+<div class="letter">
+<p>
+Happy Valentine sayangku, aku sayang banget sama kamu, tetep sama aku terus ya sayang, jangan bosen bosen sama aku  
+dan ketemu kamu sekarang masuk daftar hal paling aku tunggu.
+
+See you soon ya ✨
+</p>
+
+<button class="btn"
+onclick="window.open('https://wa.me/6285794444137?text=Happy%20Valentine%20juga%2C%20sayang%20%E2%9D%A4%EF%B8%8F%0A%0AMakasih%20sudah%20selalu%20ada%20dan%20jadi%20alasan%20aku%20ngerasa%20tenang%20sampai%20hari%20ini.%20Denger%20kamu%20bilang%20begitu%20bikin%20aku%20makin%20yakin%20kalau%20yang%20kita%20jalanin%20itu%20benar-benar%20berharga.%20Aku%20juga%20sayang%20banget%20sama%20kamu%2C%20bahkan%20mungkin%20lebih%20dari%20yang%20bisa%20aku%20jelasin%20pakai%20kata-kata.%0A%0AAku%20nggak%20akan%20bosen%20sama%20kamu%2C%20justru%20setiap%20hari%20rasanya%20selalu%20ada%20hal%20baru%20yang%20bikin%20aku%20makin%20jatuh%20cinta.%20Kamu%20juga%20termasuk%20dalam%20daftar%20paling%20atas%20dari%20semua%20hal%20yang%20aku%20tunggu%20%E2%80%94%20bukan%20cuma%20buat%20ketemu%20nanti%2C%20tapi%20juga%20buat%20semua%20cerita%20yang%20bakal%20kita%20jalanin%20setelahnya.%0A%0AJaga%20diri%20baik-baik%20sampai%20kita%20ketemu%20ya.%20Aku%20nggak%20sabar%20lihat%20senyum%20kamu%20secara%20langsung.%20See%20you%20soon%2C%20cintaku%20%E2%9C%A8')">
+Pencet ini
+</button>
+
+</div>
+</section>
+
+<section class="gallery">
+<h2>Pieces of Us 📸</h2>
+
+<div class="grid">
+<img src="ed68e0b0-64e6-47a2-a83b-2f78d6e64f4d.JPG">
+<img src="IMG_0010.JPG">
+<img src="IMG_8703.JPG">
+<img src="IMG_9737.JPG">
+</div>
+</section>
+
+<div class="viewer" id="viewer">
+<img id="viewerImg">
+</div>
+
+<section class="countdown">
+<h2>Menuju ketemu kamu ⏳</h2>
+<div class="timer" id="timer"></div>
+</section>
+
+<section class="game">
+
+<h2>Love Meter ❤️</h2>
+<p>Kita tes dulu sesuatu 😆 Klik tombolnya sampai penuh.</p>
+
+<button id="loveBtn">Klik terus!</button>
+
+<div class="meter">
+<div class="fill" id="fill"></div>
+</div>
+
+<div class="result" id="result"></div>
+
+<canvas id="confetti"></canvas>
+
+</section>
+
+<script>
+
+/* floating hearts */
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(Math.random()*18+12)+"px";
+h.style.animationDuration=(Math.random()*6+4)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),9000);
+},400);
+
+
+/* fullscreen gallery */
+
+const viewer=document.getElementById("viewer");
+const viewerImg=document.getElementById("viewerImg");
+
+document.querySelectorAll(".grid img").forEach(img=>{
+img.onclick=()=>{
+viewer.style.display="flex";
+viewerImg.src=img.src;
+};
+});
+
+viewer.onclick=()=>viewer.style.display="none";
+
+
+/* ✅ COUNTDOWN WIB PALING AKURAT */
+
+const timerEl = document.getElementById("timer");
+
+/*
+3 Maret 2026
+11:00 WIB = 04:00 UTC
+*/
+const meetDate = Date.UTC(2026, 2, 3, 4, 0, 0);
+
+function updateCountdown(){
+
+    const now = new Date().getTime();
+    const gap = meetDate - now;
+
+    if(gap <= 0){
+        timerEl.innerHTML = "Akhirnya ketemu kamu ❤️";
+        clearInterval(interval);
+        return;
+    }
+
+    // supaya tidak lompat hari
+    const days = Math.ceil(gap / (1000*60*60*24));
+
+    const hours = Math.floor(
+        (gap % (1000*60*60*24)) / (1000*60*60)
+    );
+
+    const minutes = Math.floor(
+        (gap % (1000*60*60)) / (1000*60)
+    );
+
+    const seconds = Math.floor(
+        (gap % (1000*60)) / 1000
+    );
+
+    timerEl.innerHTML =
+    `${days} Hari ${hours.toString().padStart(2,'0')} Jam 
+     ${minutes.toString().padStart(2,'0')} Menit 
+     ${seconds.toString().padStart(2,'0')} Detik`;
+}
+
+updateCountdown();
+const interval = setInterval(updateCountdown,1000);
+
+
+/* LOVE METER */
+
+let love=0;
+const btn=document.getElementById("loveBtn");
+const fill=document.getElementById("fill");
+
+btn.onclick=()=>{
+
+love+=Math.random()*12;
+
+if(love>100) love=100;
+
+fill.style.width=love+"%";
+
+btn.style.transform="scale(1.2)";
+setTimeout(()=>btn.style.transform="scale(1)",120);
+
+if(love===100){
+document.getElementById("result").innerHTML=
+"Kayaknya fix 🙂 kamu emang sayang aku.";
+
+launchConfetti();
+btn.disabled=true;
+btn.innerText="❤️";
+}
+};
+
+
+/* CONFETTI */
+
+function launchConfetti(){
+
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let pieces=[];
+
+for(let i=0;i<170;i++){
+pieces.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height-canvas.height,
+size:Math.random()*9+4,
+speed:Math.random()*3+2
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+pieces.forEach(p=>{
+ctx.fillStyle="#ff4d88";
+ctx.fillRect(p.x,p.y,p.size,p.size);
+p.y+=p.speed;
+});
+
+requestAnimationFrame(draw);
+}
+
+draw();
+
+setTimeout(()=>{
+ctx.clearRect(0,0,canvas.width,canvas.height);
+},4500);
+
+}
+
+</script>
+
+</body>
+</html>
