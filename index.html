@@ -96,6 +96,41 @@ transform:scale(1.08);
 box-shadow:0 0 25px #ff4d88;
 }
 
+/* STORY */
+
+.story{
+padding:100px 20px;
+text-align:center;
+}
+
+.story-box{
+margin-top:35px;
+background:rgba(255,255,255,.04);
+backdrop-filter:blur(8px);
+padding:35px;
+border-radius:24px;
+max-width:750px;
+margin-inline:auto;
+line-height:1.8;
+font-size:17px;
+opacity:.95;
+min-height:220px;
+}
+
+/* typing cursor */
+
+#typingStory::after{
+content:"|";
+margin-left:6px;
+animation:blink 1s infinite;
+color:#ff4d88;
+}
+
+@keyframes blink{
+0%,100%{opacity:1;}
+50%{opacity:0;}
+}
+
 /* gallery */
 
 .gallery{
@@ -175,7 +210,6 @@ background:#ff4d88;
 color:white;
 cursor:pointer;
 transition:.2s;
-position:relative;
 }
 
 #loveBtn:hover{
@@ -232,9 +266,18 @@ See you soon ya ✨
 
 <button class="btn"
 onclick="window.open('https://wa.me/6285794444137?text=Happy%20Valentine%20juga%2C%20sayang%20%E2%9D%A4%EF%B8%8F%0A%0AMakasih%20sudah%20selalu%20ada%20dan%20jadi%20alasan%20aku%20ngerasa%20tenang%20sampai%20hari%20ini.%20Denger%20kamu%20bilang%20begitu%20bikin%20aku%20makin%20yakin%20kalau%20yang%20kita%20jalanin%20itu%20benar-benar%20berharga.%20Aku%20juga%20sayang%20banget%20sama%20kamu%2C%20bahkan%20mungkin%20lebih%20dari%20yang%20bisa%20aku%20jelasin%20pakai%20kata-kata.%0A%0AAku%20nggak%20akan%20bosen%20sama%20kamu%2C%20justru%20setiap%20hari%20rasanya%20selalu%20ada%20hal%20baru%20yang%20bikin%20aku%20makin%20jatuh%20cinta.%20Kamu%20juga%20termasuk%20dalam%20daftar%20paling%20atas%20dari%20semua%20hal%20yang%20aku%20tunggu%20%E2%80%94%20bukan%20cuma%20buat%20ketemu%20nanti%2C%20tapi%20juga%20buat%20semua%20cerita%20yang%20bakal%20kita%20jalanin%20setelahnya.%0A%0AJaga%20diri%20baik-baik%20sampai%20kita%20ketemu%20ya.%20Aku%20nggak%20sabar%20lihat%20senyum%20kamu%20secara%20langsung.%20See%20you%20soon%2C%20cintaku%20%E2%9C%A8')">
-Pencet ini
+Pencet ini Sayang nanti di akhir, scroll dulu aja ke bawahh
 </button>
 
+</div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+<h2>Our Story 💕</h2>
+
+<div class="story-box">
+<span id="typingStory"></span>
 </div>
 </section>
 
@@ -305,46 +348,31 @@ viewerImg.src=img.src;
 viewer.onclick=()=>viewer.style.display="none";
 
 
-/* ✅ COUNTDOWN WIB PALING AKURAT */
+/* COUNTDOWN */
 
 const timerEl = document.getElementById("timer");
-
-/*
-3 Maret 2026
-11:00 WIB = 04:00 UTC
-*/
 const meetDate = Date.UTC(2026, 2, 3, 4, 0, 0);
 
 function updateCountdown(){
 
-    const now = new Date().getTime();
-    const gap = meetDate - now;
+const now = new Date().getTime();
+const gap = meetDate - now;
 
-    if(gap <= 0){
-        timerEl.innerHTML = "Akhirnya ketemu kamu ❤️";
-        clearInterval(interval);
-        return;
-    }
+if(gap <= 0){
+timerEl.innerHTML = "Akhirnya ketemu kamu ❤️";
+clearInterval(interval);
+return;
+}
 
-    // supaya tidak lompat hari
-    const days = Math.ceil(gap / (1000*60*60*24));
+const days = Math.ceil(gap / (1000*60*60*24));
+const hours = Math.floor((gap % (1000*60*60*24)) / (1000*60*60));
+const minutes = Math.floor((gap % (1000*60*60)) / (1000*60));
+const seconds = Math.floor((gap % (1000*60)) / 1000);
 
-    const hours = Math.floor(
-        (gap % (1000*60*60*24)) / (1000*60*60)
-    );
-
-    const minutes = Math.floor(
-        (gap % (1000*60*60)) / (1000*60)
-    );
-
-    const seconds = Math.floor(
-        (gap % (1000*60)) / 1000
-    );
-
-    timerEl.innerHTML =
-    `${days} Hari ${hours.toString().padStart(2,'0')} Jam 
-     ${minutes.toString().padStart(2,'0')} Menit 
-     ${seconds.toString().padStart(2,'0')} Detik`;
+timerEl.innerHTML =
+`${days} Hari ${hours.toString().padStart(2,'0')} Jam 
+${minutes.toString().padStart(2,'0')} Menit 
+${seconds.toString().padStart(2,'0')} Detik`;
 }
 
 updateCountdown();
@@ -360,23 +388,54 @@ const fill=document.getElementById("fill");
 btn.onclick=()=>{
 
 love+=Math.random()*12;
-
 if(love>100) love=100;
 
 fill.style.width=love+"%";
 
-btn.style.transform="scale(1.2)";
-setTimeout(()=>btn.style.transform="scale(1)",120);
-
 if(love===100){
 document.getElementById("result").innerHTML=
 "Kayaknya fix 🙂 kamu emang sayang aku.";
-
 launchConfetti();
 btn.disabled=true;
 btn.innerText="❤️";
 }
 };
+
+
+/* TYPING STORY (scroll trigger) */
+
+const storyText = `Awalnya kita ketemu tanpa sengaja — cuma pertemuan biasa yang ternyata nggak biasa buat aku. 
+Dari situ aku mulai tertarik, lalu diam-diam cari sosial media kamu dan follow berkali-kali cuma berharap kamu notice.
+
+Sampai akhirnya kamu follback, dan lucunya… kamu pernah salah kirim video TikTok ke aku. Hal kecil itu malah jadi awal obrolan panjang kita. 
+Pelan-pelan kita makin dekat, walau proses ngejar kamu sempat terasa nggak gampang 😆
+
+Tapi sekarang lihat kita — udah bareng, udah bahagia, dan semoga cerita ini nggak berhenti di sini. 
+Aku cuma mau kita tetap jalan bareng, ketawa bareng, dan bahagia bareng sampai kapanpun.`;
+
+let i = 0;
+let started = false;
+const speed = 30;
+const typingEl = document.getElementById("typingStory");
+
+function typeWriter(){
+if(i < storyText.length){
+typingEl.innerHTML += storyText.charAt(i);
+i++;
+setTimeout(typeWriter, speed);
+}
+}
+
+window.addEventListener("scroll", ()=>{
+
+const storySection = document.querySelector(".story");
+
+if(!started && window.scrollY + window.innerHeight > storySection.offsetTop + 120){
+started = true;
+typeWriter();
+}
+
+});
 
 
 /* CONFETTI */
