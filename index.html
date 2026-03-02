@@ -348,9 +348,16 @@ viewerImg.src=img.src;
 viewer.onclick=()=>viewer.style.display="none";
 
 
-/* COUNTDOWN */
+/* COUNTDOWN - 3 MARET 2026 JAM 11:00 WIB */
 
 const timerEl = document.getElementById("timer");
+
+/*
+3 Maret 2026 jam 11:00 WIB
+WIB = UTC+7
+11:00 WIB = 04:00 UTC
+*/
+
 const meetDate = Date.UTC(2026, 2, 3, 4, 0, 0);
 
 function updateCountdown(){
@@ -364,7 +371,7 @@ clearInterval(interval);
 return;
 }
 
-const days = Math.ceil(gap / (1000*60*60*24));
+const days = Math.floor(gap / (1000*60*60*24));
 const hours = Math.floor((gap % (1000*60*60*24)) / (1000*60*60));
 const minutes = Math.floor((gap % (1000*60*60)) / (1000*60));
 const seconds = Math.floor((gap % (1000*60)) / 1000);
